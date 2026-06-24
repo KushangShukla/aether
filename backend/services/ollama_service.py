@@ -1,8 +1,7 @@
 import requests
 from dotenv import load_dotenv
 import os
-from core.config import Settings
-settings=Settings.settings
+from core.config import settings
 
 load_dotenv()
 

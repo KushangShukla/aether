@@ -2,9 +2,12 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 from services.ollama_service import generate_response
-from core.config import Settings
-
-settings=Settings.settings
+from core.config import settings
+from database.connection import engine
+from database.base import Base
+import models.conversation
+import models.message
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title=settings.APP_NAME,

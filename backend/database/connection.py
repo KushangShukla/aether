@@ -11,5 +11,5 @@ DATABASE_URL=(
     f"{settings.DATABASE_NAME}"   
 )
 
-engine=create_engine(DATABASE_URL)
+engine=create_engine(DATABASE_URL,echo=settings.DEBUG)
 SessionLocal=sessionmaker(autocommit=False, autoflush=False, bind=engine)
