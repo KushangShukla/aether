@@ -1,11 +1,13 @@
 import requests
 from dotenv import load_dotenv
 import os
+from core.config import Settings
+settings=Settings.settings
 
 load_dotenv()
 
-OLLAMA_URL = os.getenv("OLLAMA_URL")
-DEFAULT_MODEL = os.getenv("DEFAULT_MODEL")
+OLLAMA_URL = settings.OLLAMA_URL
+DEFAULT_MODEL = settings.DEFAULT_MODEL
 
 def generate_response(prompt: str):
 
@@ -38,13 +40,13 @@ AETHER:
 """
 
     payload = {
-        "model": DEFAULT_MODEL,
+        "model": settings.DEFAULT_MODEL,
         "prompt": full_prompt,
         "stream": False
     }
 
     response = requests.post(
-        OLLAMA_URL,
+        settings.OLLAMA_URL,
         json=payload
     )
 

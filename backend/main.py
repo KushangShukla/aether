@@ -2,10 +2,13 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 from services.ollama_service import generate_response
+from core.config import Settings
+
+settings=Settings.settings
 
 app = FastAPI(
-    title="AETHER",
-    version="0.1"
+    title=settings.APP_NAME,
+    version=settings.APP_VERSION
 )
 
 
@@ -16,7 +19,8 @@ class ChatRequest(BaseModel):
 @app.get("/")
 def root():
     return {
-        "name": "AETHER",
+        "name": settings.APP_NAME,
+        "version": settings.APP_VERSION,
         "status": "online"
     }
 
