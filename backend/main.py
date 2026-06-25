@@ -7,16 +7,19 @@ from database.connection import engine
 from database.base import Base
 import models.conversation
 import models.message
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION
 )
 
-
 class ChatRequest(BaseModel):
+    conversation_id:int
     message: str
+
+@app.on_event("startup")
+def startup():
+    Base.metadata.create_all(bind=engine)
 
 
 @app.get("/")

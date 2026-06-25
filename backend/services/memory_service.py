@@ -27,3 +27,25 @@ def save_message(
     db.commit()
 
     return message
+
+def get_conversion_messages(
+        db:Session,
+        conversation_id:int
+):
+    return (
+        db.query(Message)
+        .filter(
+            Message.conversation_id==conversation_id
+        )
+        .all()
+    )
+
+def build_context(messages):
+    context=""
+
+    for msg in messages:
+        context+=(
+            f"{msg.role}:"
+            f"{msg.content}\n"
+        )
+    return context
